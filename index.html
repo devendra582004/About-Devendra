@@ -1,0 +1,542 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Your Name - Neo-Minimalist Portfolio</title>
+    <!-- Load Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+
+    <!-- FIX: Tailwind configuration must be in a <script> block, not <style> -->
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        'dark-bg': '#0F172A', /* Slate-900 alternative */
+                        'dark-card': '#1E293B', /* Slate-800 alternative */
+                        'neon-cyan': '#22D3EE', /* Cyan-400 */
+                        'neon-glow': 'rgba(34, 211, 238, 0.4)', /* Neon-Cyan with opacity */
+                    },
+                    boxShadow: {
+                        'neon-sm': '0 1px 3px 0 rgba(34, 211, 238, 0.1), 0 1px 2px -1px rgba(34, 211, 238, 0.1)',
+                        'neon-md': '0 4px 6px -1px rgba(34, 211, 238, 0.1), 0 2px 4px -2px rgba(34, 211, 238, 0.1)',
+                        'neon-xl': '0 20px 25px -5px rgba(34, 211, 238, 0.2), 0 8px 10px -6px rgba(34, 211, 238, 0.2)',
+                    }
+                }
+            }
+        }
+    </script>
+
+    <!-- Load Lucide Icons -->
+    <script src="https://unpkg.com/lucide@latest"></script>
+
+    <style>
+        /* Custom font import for a modern, clean look */
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@100..900&display=swap');
+
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #0F172A;
+            /* Dark background */
+            scroll-behavior: smooth;
+        }
+
+        /* Custom scrollbar for dark theme */
+        body::-webkit-scrollbar {
+            width: 8px;
+        }
+
+        body::-webkit-scrollbar-thumb {
+            background-color: #22D3EE;
+            /* Neon-Cyan */
+            border-radius: 4px;
+        }
+
+        body::-webkit-scrollbar-track {
+            background-color: #1E293B;
+            /* Dark Card */
+        }
+
+        /* Unique Hover Effect for Buttons/Links */
+        .neon-button {
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .neon-button:hover {
+            box-shadow: 0 0 15px #22D3EE, 0 0 5px #22D3EE inset;
+        }
+
+        /* Unique Card Effect */
+        .neon-card-hover {
+            transition: all 0.5s cubic-bezier(0.25, 0.8, 0.25, 1);
+        }
+
+        .neon-card-hover:hover {
+            box-shadow: 0 0 10px rgba(34, 211, 238, 0.5);
+            /* Subtle border glow */
+            border-color: #22D3EE;
+            transform: translateY(-4px);
+        }
+    </style>
+</head>
+
+<body class="text-gray-200">
+
+    <!-- Navigation Bar -->
+    <header class="sticky top-0 z-50 bg-dark-bg shadow-xl border-b border-gray-700">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex justify-between items-center h-16">
+                <!-- Logo/Name -->
+                <a href="#" class="text-3xl font-extrabold tracking-widest text-white">
+                    <span class="text-neon-cyan">DEVENDRA</span> DHOTE
+                </a>
+
+                <!-- Desktop Navigation -->
+                <nav class="hidden md:flex space-x-8">
+                    <a href="#about"
+                        class="text-gray-400 hover:text-neon-cyan transition duration-300 font-medium">About</a>
+                    <a href="#experience"
+                        class="text-gray-400 hover:text-neon-cyan transition duration-300 font-medium">Experience</a>
+                    <a href="#skills"
+                        class="text-gray-400 hover:text-neon-cyan transition duration-300 font-medium">Skills</a>
+                    <a href="#projects"
+                        class="text-gray-400 hover:text-neon-cyan transition duration-300 font-medium">Projects</a>
+                    <a href="#contact"
+                        class="px-4 py-2 text-sm bg-neon-cyan text-dark-bg font-semibold rounded-lg neon-button transform hover:scale-[1.05]">Contact
+                        Me</a>
+                </nav>
+
+                <!-- Mobile Menu Button -->
+                <button id="mobile-menu-button" class="md:hidden p-2 text-neon-cyan hover:text-white rounded-lg">
+                    <script>
+                        document.write(lucide.createIcons()['menu'].toSvg({ class: 'w-6 h-6' }));
+                    </script>
+                </button>
+            </div>
+        </div>
+        <!-- Mobile Menu Overlay -->
+        <div id="mobile-menu"
+            class="hidden md:hidden absolute w-full bg-dark-card shadow-2xl py-4 transition-all duration-300 ease-in-out">
+            <nav class="flex flex-col space-y-3 px-4">
+                <a href="#about"
+                    class="text-gray-300 hover:text-neon-cyan transition duration-300 font-medium py-2 border-b border-gray-700">About</a>
+                <a href="#experience"
+                    class="text-gray-300 hover:text-neon-cyan transition duration-300 font-medium py-2 border-b border-gray-700">Experience</a>
+                <a href="#skills"
+                    class="text-gray-300 hover:text-neon-cyan transition duration-300 font-medium py-2 border-b border-gray-700">Skills</a>
+                <a href="#projects"
+                    class="text-gray-300 hover:text-neon-cyan transition duration-300 font-medium py-2 border-b border-gray-700">Projects</a>
+                <a href="#contact"
+                    class="px-4 py-2 text-center bg-neon-cyan text-dark-bg font-semibold rounded-lg neon-button mt-4">Contact
+                    Me</a>
+            </nav>
+        </div>
+    </header>
+
+    <main>
+        <!-- Hero Section -->
+        <section id="hero" class="py-24 md:py-40 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+            <div class="max-w-4xl mx-auto">
+                <!-- Placeholder Image/Avatar -->
+                <div
+                    class="w-32 h-32 mx-auto mb-8 bg-dark-card rounded-full border-4 border-neon-cyan overflow-hidden shadow-neon-xl">
+                    <img src="dev_photo_11zon.jpg" alt="Profile Picture"
+                        class="w-full h-full object-cover rounded-full">
+
+                </div>
+
+                <p class="text-xl text-neon-cyan uppercase tracking-widest mb-4 font-semibold">
+                    [Software Developer]
+                </p>
+                <h1 class="text-4xl sm:text-5xl font-extrabold leading-tight mb-6 text-white">
+                    Crafting intelligent, scalable web experiences that connect performance with purpose.
+                    <p class="text-lg sm:text-xl text-gray-400 mb-10 font-light max-w-2xl mx-auto">
+                        A passionate software engineer and aspiring full-stack web developer, dedicated to transforming
+                        innovative ideas into efficient, scalable, and user-focused web solutions.
+                    </p>
+                    <div class="flex justify-center space-x-6">
+                        <a href="#projects"
+                            class="inline-flex items-center px-8 py-3 border border-transparent text-lg font-medium rounded-xl shadow-lg text-dark-bg bg-neon-cyan neon-button transform hover:scale-[1.05]">
+                            <script>document.write(lucide.createIcons()['sparkles'].toSvg({ class: 'w-5 h-5 mr-3' }));</script>
+                            My Work
+                        </a>
+                        <a href="#contact"
+                            class="inline-flex items-center px-8 py-3 border border-neon-cyan text-lg font-medium rounded-xl text-neon-cyan bg-dark-bg neon-button transform hover:scale-[1.05]">
+                            <script>document.write(lucide.createIcons()['zap'].toSvg({ class: 'w-5 h-5 mr-3' }));</script>
+                            Hire Me
+                        </a>
+                    </div>
+            </div>
+        </section>
+
+        <!-- About Me Section -->
+        <section id="about" class="py-16 md:py-24 border-t border-gray-700">
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                <h2
+                    class="text-4xl font-bold text-center text-white mb-16 border-b-2 border-neon-cyan inline-block pb-2">
+                    About Me</h2>
+
+                <div class="grid md:grid-cols-2 gap-16 items-center">
+                    <div class="text-lg leading-relaxed text-gray-400">
+                        <p class="mb-6">Hello! I'm Devendra Dhote, a passionate developer exploring the world of
+                            full-stack web development. My focus lies at the intersection of intelligent systems and
+                            beautiful front-end experiences, creating seamless and scalable digital solutions that make
+                            an impact.</p>
+                        <p class="mb-6">I hold a degree in Information Technology. I believe that great code is not just
+                            functional, but also clean, efficient, and maintainable. I enjoy building seamless user
+                            experiences and optimizing web applications for performance and scalability.</p>
+                        <p class="mb-4">When I step away from the keyboard, I'm usually listening to music, exploring
+                            new tech ideas, or sketching out future projects.</p>
+                    </div>
+                    <div class="bg-dark-card p-6 rounded-3xl shadow-neon-xl border border-gray-700">
+                        <img src="https://placehold.co/600x400/22D3EE/0F172A?text=Project+Overview"
+                            onerror="this.src='https://placehold.co/600x400/22D3EE/0F172A?text=Project+Overview'"
+                            alt="Project Overview" class="w-full h-auto rounded-2xl">
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- EXPERIENCE & ACHIEVEMENTS Section -->
+        <section id="experience" class="py-16 md:py-24 border-t border-gray-700">
+            <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
+                <h2
+                    class="text-4xl font-bold text-center text-white mb-16 border-b-2 border-neon-cyan inline-block pb-2">
+                    Experience & Achievements</h2>
+
+                <!-- Vertical Timeline Container -->
+                <div class="relative">
+                    <!-- Vertical Line (The Core Timeline) -->
+                    <div class="absolute left-4 md:left-1/2 transform -translate-x-1/2 h-full w-1 bg-gray-700"></div>
+
+                    <!-- Timeline Item 1: Internship -->
+                    <div
+                        class="mb-12 flex flex-col md:flex-row justify-between items-start md:odd:flex-row-reverse relative">
+                        <!-- Circle Indicator -->
+                        <div
+                            class="absolute -left-0.5 md:left-1/2 top-0 transform -translate-x-1/2 w-8 h-8 rounded-full bg-neon-cyan border-4 border-dark-bg shadow-neon-md flex items-center justify-center z-10">
+                            <script>document.write(lucide.createIcons()['briefcase'].toSvg({ class: 'w-4 h-4 text-dark-bg' }));</script>
+                        </div>
+
+                        <!-- Content Card -->
+                        <div
+                            class="md:w-[calc(50%-2rem)] w-full ml-10 md:ml-0 md:odd:mr-10 md:even:ml-10 p-6 bg-dark-card rounded-xl border border-gray-700 shadow-neon-sm transition duration-500 neon-card-hover">
+                            <p class="text-sm font-semibold text-neon-cyan uppercase mb-1">Oct 2024 - Nov 2024</p>
+                            <h3 class="text-xl font-bold text-white mb-2">FixPoint Pvt. Ltd.</h3>
+                            <p class="text-md font-medium text-gray-400 mb-3">Web Development Intern</p>
+                            <ul class="list-disc list-outside text-gray-400 space-y-1 pl-5">
+                                <li>Worked as a Web Development Intern at Fix Point, contributing to front-end design
+                                    and functionality enhancements of live client projects
+                                    using HTML, CSS, and JavaScript.</li>
+                                <li>Collaborated with the development team to build responsive UI components and
+                                    optimize page performance for a better user experience.</li>
+                                <li>Gained hands-on experience with version control (Git), debugging, and real-time
+                                    problem-solving in a startup environment</li>
+                            </ul>
+                        </div>
+                    </div>
+
+                    <!-- Timeline Item 2: Achievement/Award -->
+                    <div
+                        class="mb-12 flex flex-col md:flex-row justify-between items-start md:odd:flex-row-reverse relative">
+                        <!-- Circle Indicator -->
+                        <div
+                            class="absolute -left-0.5 md:left-1/2 top-0 transform -translate-x-1/2 w-8 h-8 rounded-full bg-neon-cyan border-4 border-dark-bg shadow-neon-md flex items-center justify-center z-10">
+                            <script>document.write(lucide.createIcons()['award'].toSvg({ class: 'w-4 h-4 text-dark-bg' }));</script>
+                        </div>
+
+                        <!-- Content Card -->
+                        <div
+                            class="md:w-[calc(50%-2rem)] w-full ml-10 md:ml-0 md:odd:mr-10 md:even:ml-10 p-6 bg-dark-card rounded-xl border border-gray-700 shadow-neon-sm transition duration-500 neon-card-hover">
+                            <p class="text-sm font-semibold text-neon-cyan uppercase mb-1">October 2023</p>
+                            <h3 class="text-xl font-bold text-white mb-2">Finalist in Aptitude Premier League</h3>
+                            <p class="text-md font-medium text-gray-400 mb-3">An inter-college aptitude competition</p>
+                            <ul class="list-disc list-outside text-gray-400 space-y-1 pl-5">
+                                <li>Demonstrated excellence in quantitative aptitude, verbal ability, and critical
+                                    thinking through multiple competitive rounds.</li>
+                                <li>Secured finalist position among top performers in an inter-college aptitude
+                                    competition, showcasing strong logical reasoning and analytical problem-solving
+                                    skills.</li>
+                            </ul>
+                        </div>
+                    </div>
+
+                    <!-- Timeline Item 3: Job Role (Example) -->
+                    <div
+                        class="mb-12 flex flex-col md:flex-row justify-between items-start md:odd:flex-row-reverse relative">
+                        <!-- Circle Indicator -->
+                        <div
+                            class="absolute -left-0.5 md:left-1/2 top-0 transform -translate-x-1/2 w-8 h-8 rounded-full bg-neon-cyan border-4 border-dark-bg shadow-neon-md flex items-center justify-center z-10">
+                            <script>document.write(lucide.createIcons()['terminal'].toSvg({ class: 'w-4 h-4 text-dark-bg' }));</script>
+                        </div>
+
+                        <!-- Content Card -->
+                        <div
+                            class="md:w-[calc(50%-2rem)] w-full ml-10 md:ml-0 md:odd:mr-10 md:even:ml-10 p-6 bg-dark-card rounded-xl border border-gray-700 shadow-neon-sm transition duration-500 neon-card-hover">
+                            <p class="text-sm font-semibold text-neon-cyan uppercase mb-1">Aug 2025 - Oct 2025</p>
+                            <h3 class="text-xl font-bold text-white mb-2">Hackveda</h3>
+                            <p class="text-md font-medium text-gray-400 mb-3">Web Development Intern</p>
+                            <ul class="list-disc list-outside text-gray-400 space-y-1 pl-5">
+                                <li>Completed internship at Hackveda focused on full-stack web development, gaining
+                                    hands-on experience with modern tools and technologies
+                                    like HTML, CSS, JavaScript, and backend scripting</li>
+                                <li>Built mini projects and solved real-world coding challenges to strengthen core
+                                    programming and problem-solving skills</li>
+                            </ul>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </section>
+
+        <!-- Skills Section -->
+        <section id="skills" class="py-16 md:py-24 border-t border-gray-700">
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                <h2
+                    class="text-4xl font-bold text-center text-white mb-16 border-b-2 border-neon-cyan inline-block pb-2">
+                    Tech Stack</h2>
+
+                <div class="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-5 gap-8">
+
+                    <!-- Skill Card Template -->
+                    <div
+                        class="skill-card bg-dark-card p-8 rounded-2xl border border-gray-700 text-center transition duration-300 neon-card-hover">
+                        <div class="mb-3">
+                            <script>document.write(lucide.createIcons()['layout-dashboard'].toSvg({ class: 'w-10 h-10 mx-auto text-neon-cyan' }));</script>
+                        </div>
+                        <p class="text-xl font-bold text-white">React & Next.js</p>
+                        <p class="text-sm text-gray-400 mt-1">Front-End Frameworks</p>
+                    </div>
+
+                    <div
+                        class="skill-card bg-dark-card p-8 rounded-2xl border border-gray-700 text-center transition duration-300 neon-card-hover">
+                        <div class="mb-3">
+                            <script>document.write(lucide.createIcons()['server'].toSvg({ class: 'w-10 h-10 mx-auto text-neon-cyan' }));</script>
+                        </div>
+                        <p class="text-xl font-bold text-white">Node.js & Express</p>
+                        <p class="text-sm text-gray-400 mt-1">Backend Development</p>
+                    </div>
+
+                    <div
+                        class="skill-card bg-dark-card p-8 rounded-2xl border border-gray-700 text-center transition duration-300 neon-card-hover">
+                        <div class="mb-3">
+                            <script>document.write(lucide.createIcons()['database'].toSvg({ class: 'w-10 h-10 mx-auto text-neon-cyan' }));</script>
+                        </div>
+                        <p class="text-xl font-bold text-white">SQL/MongoDB</p>
+                        <p class="text-sm text-gray-400 mt-1">Database Systems</p>
+                    </div>
+
+                    <div
+                        class="skill-card bg-dark-card p-8 rounded-2xl border border-gray-700 text-center transition duration-300 neon-card-hover">
+                        <div class="mb-3">
+                            <script>document.write(lucide.createIcons()['git-branch'].toSvg({ class: 'w-10 h-10 mx-auto text-neon-cyan' }));</script>
+                        </div>
+                        <p class="text-xl font-bold text-white">Git & GitHub</p>
+                        <p class="text-sm text-gray-400 mt-1">Version Control</p>
+                    </div>
+                    <div
+                        class="skill-card bg-dark-card p-8 rounded-2xl border border-gray-700 text-center transition duration-300 neon-card-hover">
+                        <div class="mb-3">
+                            <script>document.write(lucide.createIcons()['git-branch'].toSvg({ class: 'w-10 h-10 mx-auto text-neon-cyan' }));</script>
+                        </div>
+                        <p class="text-xl font-bold text-white">HTML, CSS & JavaScript</p>
+                        <p class="text-sm text-gray-400 mt-1">Basic Front-End Development</p>
+                    </div>
+
+
+                </div>
+            </div>
+        </section>
+
+        <!-- Projects Section -->
+        <section id="projects" class="py-16 md:py-24 border-t border-gray-700">
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                <h2
+                    class="text-4xl font-bold text-center text-white mb-16 border-b-2 border-neon-cyan inline-block pb-2">
+                    Showcase</h2>
+
+                <div class="grid gap-12 lg:grid-cols-2">
+
+                    <!-- Project Card 1 -->
+                    <div
+                        class="project-card bg-dark-card rounded-2xl border border-gray-700 overflow-hidden transition-all duration-500 neon-card-hover group">
+                        <img src="https://placehold.co/800x450/22D3EE/0F172A?text=Project+1+Preview"
+                            onerror="this.src='https://placehold.co/800x450/22D3EE/0F172A?text=Project+1+Preview'"
+                            alt="Project 1 Image"
+                            class="w-full h-56 object-cover group-hover:scale-[1.05] transition-transform duration-500">
+                        <div class="p-8">
+                            <h3 class="text-2xl font-bold text-white mb-3">Ultimate Finance Tracker Dashboard</h3>
+                            <p class="text-gray-400 mb-5">Developed a Ultimate Finance Tracker Dashboard using HTML,
+                                CSS, and JavaScript to help users manage daily income, expenses, and savings with a
+                                clean, interactive UI.</p>
+                            <div class="flex flex-wrap gap-3 mb-6">
+                                <span
+                                    class="px-4 py-1 bg-neon-cyan text-dark-bg text-sm font-medium rounded-full">Google
+                                    Firestore</span>
+                                <span
+                                    class="px-4 py-1 border border-neon-cyan text-neon-cyan text-sm font-medium rounded-full">
+                                    Tailwind CSS</span>
+                                <span
+                                    class="px-4 py-1 border border-neon-cyan text-neon-cyan text-sm font-medium rounded-full">JavaScript</span>
+                            </div>
+                            <div class="flex space-x-6">
+                                <a href="https://devendra582004.github.io/Smart_Finance_Tracker/" target="_blank"
+                                    class="flex items-center text-neon-cyan hover:text-white font-semibold transition duration-300">
+                                    <i data-lucide="monitor" class="w-5 h-5 mr-2"></i>
+                                    Live Demo
+                                </a>
+                                <a href="https://github.com/devendra582004/Smart_Finance_Tracker" target="_blank"
+                                    class="flex items-center text-gray-400 hover:text-white font-medium transition duration-300">
+                                    <i data-lucide="github" class="w-5 h-5 mr-2"></i>
+                                    Code Repo
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Project Card 2 -->
+                    <div
+                        class="project-card bg-dark-card rounded-2xl border border-gray-700 overflow-hidden transition-all duration-500 neon-card-hover group">
+                        <img src="https://placehold.co/800x450/3730a3/22D3EE?text=Project+2+Preview"
+                            onerror="this.src='https://placehold.co/800x450/3730a3/22D3EE?text=Project+2+Preview'"
+                            alt="Project 2 Image"
+                            class="w-full h-56 object-cover group-hover:scale-[1.05] transition-transform duration-500">
+                        <div class="p-8">
+                            <h3 class="text-2xl font-bold text-white mb-3">Digital-Matrix-Quiz</h3>
+                            <p class="text-gray-400 mb-5">designed interactive MCQ quiz interface with timer, question
+                                navigation and auto evaluation using HTML, CSS, JavaScript and optionally backend
+                                integration.</p>
+                            <div class="flex flex-wrap gap-3 mb-6">
+                                <span
+                                    class="px-4 py-1 bg-neon-cyan text-dark-bg text-sm font-medium rounded-full">Tailwind
+                                    CSS</span>
+                                <span
+                                    class="px-4 py-1 border border-neon-cyan text-neon-cyan text-sm font-medium rounded-full">Vanilla
+                                    JavaScript</span>
+                                <span
+                                    class="px-4 py-1 border border-neon-cyan text-neon-cyan text-sm font-medium rounded-full">Google
+                                    Firestore</span>
+                            </div>
+                              <div class="flex space-x-6"> 
+                            
+                                
+                                <a href="https://devendra582004.github.io/Digital-Matrix-Quiz/" target="_blank"
+                                    class="flex items-center text-neon-cyan hover:text-white font-semibold transition duration-300">
+                                    <i data-lucide="monitor" class="w-5 h-5 mr-2"></i>
+                                    Live Demo
+                                </a>
+                                <a href="https://github.com/devendra582004/Digital-Matrix-Quiz" target="_blank"
+                                    class="flex items-center text-gray-400 hover:text-white font-medium transition duration-300">
+                                    <i data-lucide="github" class="w-5 h-5 mr-2"></i>
+                                    Code Repo
+                                </a>
+                            </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="text-center mt-20">
+                    <a href="https://github.com/"
+                        class="inline-flex items-center px-8 py-4 border border-neon-cyan text-xl font-semibold rounded-xl text-neon-cyan bg-dark-bg neon-button transform hover:scale-105">
+                        <script>document.write(lucide.createIcons()['folder-open'].toSvg({ class: 'w-6 h-6 mr-3' }));</script>
+                        See All Projects
+                    </a>
+                </div>
+            </div>
+        </section>
+
+        <!-- Contact Section -->
+        <section id="contact" class="py-16 md:py-24 bg-dark-card border-t border-gray-700">
+            <div class="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8 text-center text-white">
+                <h2 class="text-4xl font-bold mb-4">Ready to collaborate?</h2>
+                <p class="text-lg mb-10 text-gray-400 max-w-2xl mx-auto">I’m currently seeking a challenging role to
+                    leverage my full-stack development skills and create impactful, scalable digital solutions. Let’s
+                    build something extraordinary together.</p>
+
+                <a href="mailto:your.email@example.com"
+                    class="inline-flex items-center px-10 py-5 border border-transparent text-xl font-bold rounded-2xl shadow-neon-xl text-dark-bg bg-neon-cyan neon-button transform hover:scale-[1.05]">
+                    <script>document.write(lucide.createIcons()['send'].toSvg({ class: 'w-6 h-6 mr-3' }));</script>
+                    devendradhote0508@gmail.com
+                </a>
+
+                <div class="flex justify-center space-x-8 mt-16 text-gray-400">
+                    <!-- LinkedIn -->
+                    <a href="https://www.linkedin.com/in/devendra-dhote-57885225a/" target="_blank"
+                        class="hover:text-neon-cyan transition duration-300 transform hover:scale-110">
+                        <svg class="w-8 h-8 fill-current" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+                            <path
+                                d="M19 0h-14c-2.761 0-5 2.239-5 5v14c0 2.761 2.239 5 5 5h14c2.762 0 5-2.239 5-5v-14c0-2.761-2.238-5-5-5zm-11 19h-3v-11h3v11zm-1.5-12.268c-.966 0-1.75-.79-1.75-1.764s.784-1.764 1.75-1.764 1.75.79 1.75 1.764-.783 1.764-1.75 1.764zm13.5 12.268h-3v-5.604c0-3.368-4-3.535-4 0v5.604h-3v-11h3v1.765c1.396-2.586 7-2.777 7 2.476v6.759z" />
+                        </svg>
+                    </a>
+
+                    <!-- GitHub -->
+                    <a href="https://github.com/" target="_blank"
+                        class="hover:text-neon-cyan transition duration-300 transform hover:scale-110">
+                        <svg class="w-8 h-8 fill-current" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+                            <path
+                                d="M12 .297c-6.63 0-12 5.373-12 12 0 5.303 3.438 9.8 8.205 11.387.6.113.82-.258.82-.577v-2.234c-3.338.724-4.033-1.415-4.033-1.415-.546-1.387-1.333-1.756-1.333-1.756-1.089-.744.083-.729.083-.729 1.205.084 1.838 1.236 1.838 1.236 1.07 1.835 2.807 1.305 3.492.998.108-.776.418-1.305.76-1.605-2.665-.305-5.466-1.333-5.466-5.933 0-1.31.468-2.381 1.235-3.221-.135-.303-.54-1.527.105-3.176 0 0 1.005-.322 3.3 1.23a11.52 11.52 0 013.003-.404c1.02.005 2.045.138 3.003.404 2.28-1.552 3.285-1.23 3.285-1.23.645 1.649.24 2.873.12 3.176.765.84 1.23 1.911 1.23 3.221 0 4.61-2.805 5.625-5.475 5.922.435.375.81 1.11.81 2.235v3.315c0 .319.21.694.825.576C20.565 22.092 24 17.592 24 12.297c0-6.627-5.373-12-12-12" />
+                        </svg>
+                    </a>
+
+                    <!-- Twitter/X -->
+                    <a href="https://x.com/home" target="_blank"
+                        class="hover:text-neon-cyan transition duration-300 transform hover:scale-110">
+                        <svg class="w-8 h-8 fill-current" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+                            <path
+                                d="M23.954 4.569c-.885.392-1.83.656-2.825.775 1.014-.611 1.794-1.574 2.163-2.723-.949.555-2.005.959-3.127 1.184-.897-.959-2.178-1.555-3.594-1.555-2.723 0-4.932 2.206-4.932 4.928 0 .39.045.765.127 1.124-4.094-.205-7.725-2.165-10.164-5.144-.424.729-.666 1.577-.666 2.476 0 1.708.869 3.216 2.188 4.099-.807-.026-1.566-.248-2.228-.616v.062c0 2.385 1.693 4.374 3.946 4.827-.413.112-.849.171-1.296.171-.317 0-.626-.03-.927-.086.627 1.956 2.444 3.376 4.6 3.417-1.68 1.318-3.809 2.105-6.102 2.105-.396 0-.788-.023-1.175-.069 2.179 1.397 4.768 2.213 7.557 2.213 9.054 0 14-7.496 14-13.986 0-.21 0-.423-.015-.634.961-.689 1.8-1.56 2.46-2.548l-.047-.02z" />
+                        </svg>
+                    </a>
+                </div>
+
+            </div>
+        </section>
+
+        <!-- Footer -->
+        <footer class="bg-dark-bg text-gray-400 py-6 border-t border-gray-800">
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center text-sm">
+                <p>&copy; <span id="current-year"></span> Devendra Dhote. Code and design by Devendra Dhote.</p>
+            </div>
+        </footer>
+
+    </main>
+
+    <script>
+        // Set the current year in the footer
+        document.getElementById('current-year').textContent = new Date().getFullYear();
+
+        // Mobile Menu Toggle Logic
+        const mobileMenuButton = document.getElementById('mobile-menu-button');
+        const mobileMenu = document.getElementById('mobile-menu');
+
+        mobileMenuButton.addEventListener('click', () => {
+            mobileMenu.classList.toggle('hidden');
+            // Change icon
+            const currentIcon = mobileMenuButton.querySelector('svg');
+            if (mobileMenu.classList.contains('hidden')) {
+                // Show menu icon
+                currentIcon.outerHTML = lucide.createIcons()['menu'].toSvg({ class: 'w-6 h-6' });
+            } else {
+                // Show close icon
+                currentIcon.outerHTML = lucide.createIcons()['x'].toSvg({ class: 'w-6 h-6' });
+            }
+        });
+
+        // Close mobile menu when a link is clicked
+        const mobileLinks = mobileMenu.querySelectorAll('a');
+        mobileLinks.forEach(link => {
+            link.addEventListener('click', () => {
+                mobileMenu.classList.add('hidden');
+                mobileMenuButton.querySelector('svg').outerHTML = lucide.createIcons()['menu'].toSvg({ class: 'w-6 h-6' });
+            });
+        });
+    </script>
+
+</body>
+
+</html>
